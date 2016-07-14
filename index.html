@@ -63,22 +63,18 @@
             background: black;
         }
         
-        @font-face {
-            font-family: 'Nimbus';
-            src: url('assets/font/Chivo-Bold.otf') format('opentype');
-        }
-        
         html {
-            font-family: 'Nimbus', sans-serif;
+            font-family: 'Helvetica', 'Arial', sans-serif;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             font-size: 20px;
+            font-weight: bolder;
         }
         
         h1,
         h2,
         p {
-            font-size: 10vh;
+            font-size: 6vh;
             max-font-size: 50px;
             margin: 1rem 1rem 3rem;
         }
@@ -86,7 +82,8 @@
         section h1,
         section h2,
         section p {
-            font-size: 5vh;
+            font-size: 4vh;
+            max-font-size: 25px;
         }
     </style>
 
@@ -100,7 +97,7 @@
         <h1>John J Graham</h1>
         <h2>I help early stage startups talk and grow.</h2>
         <p>I’m a mobile marketing expert who has led some of the UK’s most admired mobile-first businesses, from launch, to high-growth, and acquisition.</p>
-        <p>I’ve helped the likes of <a href="#change-me">YPlan</a>, <a href="#change-me">Uncover</a>, and <a href="#change-me">Gett</a>, find the right users. And talk in a way that stands out.</p>
+        <p>I’ve helped the likes of <a href="https://yplanapp.com/">YPlan</a>, <a href="https://velocityapp.com/">Uncover</a>, and <a href="http://gett.com/uk/">Gett</a>, find the right users. And talk in a way that stands out.</p>
         <p>You won’t find me spouting startup jargon. Or recommending cat gifs.</p>
         <p>You will find me working on marketing, communication, and launch strategies that you (or we) can actually implement. And finding ways to get users that matter to your business.</p>
         <p>Be it with a day of consultancy. Or 12 months getting our hands dirty. Together.</p>
@@ -112,279 +109,279 @@
     <section>
         <p>Other clients I’ve worked with: <a href="#change-me">Deloitte</a>, <a href="http://www.getalbert.com/">Albert</a>, <a href="http://www.appsumer.io/">Appsumer</a>, <a href="http://www.streetbees.com/">Streetbees</a>, <a href="http://www.activeinboxhq.com/">ActiveInbox</a>, <a href="http://www.causr.co/">Causr</a>.</p>
     </section>
-<script>
-    /* 
+    <script>
+        /* 
 
-    mm-fontsize.js
+            mm-fontsize.js
 
-    This script uses stylfill.js (https://github.com/nathanford/stylefill/) to allow properties to be written in the CSS.
+            This script uses stylfill.js (https://github.com/nathanford/stylefill/) to allow properties to be written in the CSS.
 
-    To use the min-font-size or max-font-size propery, just write it in your CSS like any other property:
+            To use the min-font-size or max-font-size propery, just write it in your CSS like any other property:
 
-    h1 {
-    	font-size: 4vw
-    	max-font-size: 50px;
-    	min-font-size: 20px;
-    } 
+            h1 {
+            	font-size: 4vw
+            	max-font-size: 50px;
+            	min-font-size: 20px;
+            } 
 
-    Notes: 
-    * This is only for when using vw or vh units for font size.
-    * Right now, only px is the only unit accepted for min and max-font-size
+            Notes: 
+            * This is only for when using vw or vh units for font size.
+            * Right now, only px is the only unit accepted for min and max-font-size
 
-    */
+            */
 
-    var stylefill = {
+        var stylefill = {
 
-        allRules: new Object(),
+            allRules: new Object(),
 
-        allFills: new Object(),
+            allFills: new Object(),
 
-        objSize: function(obj) {
+            objSize: function (obj) {
 
-            var size = 0,
-                key;
+                var size = 0,
+                    key;
 
-            for (key in obj) {
-                if (obj.hasOwnProperty(key)) size++;
-            }
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) size++;
+                }
 
-            return size;
+                return size;
 
-        },
+            },
 
-        arraySliceShim: function() { // fixes Array.prototype.slice support for IE lt 9
+            arraySliceShim: function () { // fixes Array.prototype.slice support for IE lt 9
 
-            'use strict';
-            var _slice = Array.prototype.slice;
+                'use strict';
+                var _slice = Array.prototype.slice;
 
-            try {
-                _slice.call(document.documentElement);
-            } catch (e) { // Fails in IE < 9
+                try {
+                    _slice.call(document.documentElement);
+                } catch (e) { // Fails in IE < 9
 
-                Array.prototype.slice = function(begin, end) {
+                    Array.prototype.slice = function (begin, end) {
 
-                    var i, arrl = this.length,
-                        a = [];
+                        var i, arrl = this.length,
+                            a = [];
 
-                    if (this.charAt) {
+                        if (this.charAt) {
 
-                        for (i = 0; i < arrl; i++) {
-                            a.push(this.charAt(i));
+                            for (i = 0; i < arrl; i++) {
+                                a.push(this.charAt(i));
+                            }
+
+                        } else {
+
+                            for (i = 0; i < this.length; i++) {
+                                a.push(this[i]);
+                            }
+
                         }
 
-                    } else {
+                        return _slice.call(a, begin, end || a.length);
 
-                        for (i = 0; i < this.length; i++) {
-                            a.push(this[i]);
-                        }
+                    };
 
-                    }
+                }
 
-                    return _slice.call(a, begin, end || a.length);
+            },
+
+            init: function (params) {
+
+                this.allFills = params;
+
+                this.getStyleSheet(params);
+
+            },
+
+            loadFile: function (params, url, scount) {
+
+                var req;
+
+                if (window.XMLHttpRequest) req = new XMLHttpRequest();
+                else req = new ActiveXObject("Microsoft.XMLHTTP");
+
+                req.open("GET", url, true);
+
+                req.onreadystatechange = function () {
+
+                    if (this.readyState == 4 && this.status == 200) stylefill.findRules(params, this.responseText, scount);
 
                 };
 
-            }
+                req.send(null);
 
-        },
+            },
 
-        init: function(params) {
+            getStyleSheet: function (params) {
 
-            this.allFills = params;
+                var sheetstext = new Array(),
+                    sheets = Array.prototype.slice.call(document.getElementsByTagName('link')); // grab stylesheet links - not used yet
 
-            this.getStyleSheet(params);
+                sheets.push(Array.prototype.slice.call(document.getElementsByTagName('style'))[0]); // add on page CSS
 
-        },
+                sheets.reverse();
 
-        loadFile: function(params, url, scount) {
+                var scount = this.objSize(sheets);
 
-            var req;
+                while (scount-- > 0) {
 
-            if (window.XMLHttpRequest) req = new XMLHttpRequest();
-            else req = new ActiveXObject("Microsoft.XMLHTTP");
+                    var sheet = sheets[scount];
 
-            req.open("GET", url, true);
+                    if (sheet.innerHTML) this.findRules(params, sheet.innerHTML, scount);
+                    else if (sheet.href.match(document.domain)) this.loadFile(params, sheet.href, scount);
 
-            req.onreadystatechange = function() {
+                }
 
-                if (this.readyState == 4 && this.status == 200) stylefill.findRules(params, this.responseText, scount);
+            },
 
-            };
+            checkRule: function (property) {
 
-            req.send(null);
+                var propertyCamel = property.replace(/(^|-)([a-z])/g, function (m1, m2, m3) {
+                    return m3.toUpperCase();
+                });
 
-        },
+                if (('Webkit' + propertyCamel) in document.body.style || ('Moz' + propertyCamel) in document.body.style || ('O' + propertyCamel) in document.body.style || property in document.body.style) return true;
 
-        getStyleSheet: function(params) {
+                else return false;
 
-            var sheetstext = new Array(),
-                sheets = Array.prototype.slice.call(document.getElementsByTagName('link')); // grab stylesheet links - not used yet
+            },
 
-            sheets.push(Array.prototype.slice.call(document.getElementsByTagName('style'))[0]); // add on page CSS
+            findRules: function (params, sheettext, scount) {
 
-            sheets.reverse();
+                if (sheettext) {
 
-            var scount = this.objSize(sheets);
+                    var pcount = this.objSize(params);
 
-            while (scount-- > 0) {
+                    for (property in params) {
 
-                var sheet = sheets[scount];
+                        var selreg = new RegExp('([^}{]+){([^}]+)?' + property.replace('-', '\\-') + '[\\s\\t]*:[\\s\\t]*([^;]+)', 'gi'),
+                            selmatch,
 
-                if (sheet.innerHTML) this.findRules(params, sheet.innerHTML, scount);
-                else if (sheet.href.match(document.domain)) this.loadFile(params, sheet.href, scount);
+                            support = stylefill.checkRule(property);
 
-            }
+                        while (selmatch = selreg.exec(sheettext)) {
 
-        },
+                            var sels = selmatch[1].replace(/^([\s\n\r\t]+|\/\*.*?\*\/)+/, '').replace(/[\s\n\r\t]+$/, ''),
+                                val = selmatch[3];
 
-        checkRule: function(property) {
+                            sels = sels.split(',');
 
-            var propertyCamel = property.replace(/(^|-)([a-z])/g, function(m1, m2, m3) {
-                return m3.toUpperCase();
-            });
+                            for (sel in sels) {
 
-            if (('Webkit' + propertyCamel) in document.body.style || ('Moz' + propertyCamel) in document.body.style || ('O' + propertyCamel) in document.body.style || property in document.body.style) return true;
+                                var s = sels[sel];
 
-            else return false;
+                                if (!stylefill.allRules[s]) stylefill.allRules[s] = new Object();
+                                stylefill.allRules[s][property] = {
+                                    'support': support,
+                                    'value': val
+                                };
 
-        },
-
-        findRules: function(params, sheettext, scount) {
-
-            if (sheettext) {
-
-                var pcount = this.objSize(params);
-
-                for (property in params) {
-
-                    var selreg = new RegExp('([^}{]+){([^}]+)?' + property.replace('-', '\\-') + '[\\s\\t]*:[\\s\\t]*([^;]+)', 'gi'),
-                        selmatch,
-
-                        support = stylefill.checkRule(property);
-
-                    while (selmatch = selreg.exec(sheettext)) {
-
-                        var sels = selmatch[1].replace(/^([\s\n\r\t]+|\/\*.*?\*\/)+/, '').replace(/[\s\n\r\t]+$/, ''),
-                            val = selmatch[3];
-
-                        sels = sels.split(',');
-
-                        for (sel in sels) {
-
-                            var s = sels[sel];
-
-                            if (!stylefill.allRules[s]) stylefill.allRules[s] = new Object();
-                            stylefill.allRules[s][property] = {
-                                'support': support,
-                                'value': val
-                            };
+                            }
 
                         }
 
                     }
 
-                }
-
-                if (scount == 1) this.runFills();
-
-            }
-
-        },
-
-        runFills: function() {
-
-            var allRules = stylefill.allRules,
-                allFills = stylefill.allFills;
-
-            for (i in allRules) {
-
-                var rules = allRules[i];
-
-                for (j in rules) {
-
-                    var rule = rules[j],
-                        func = allFills[j],
-
-                        newrule = {
-
-                            support: rule['support'],
-                            selector: i,
-                            property: j,
-                            value: rule['value']
-
-                        };
-
-                    func(newrule);
+                    if (scount == 1) this.runFills();
 
                 }
 
+            },
+
+            runFills: function () {
+
+                var allRules = stylefill.allRules,
+                    allFills = stylefill.allFills;
+
+                for (i in allRules) {
+
+                    var rules = allRules[i];
+
+                    for (j in rules) {
+
+                        var rule = rules[j],
+                            func = allFills[j],
+
+                            newrule = {
+
+                                support: rule['support'],
+                                selector: i,
+                                property: j,
+                                value: rule['value']
+
+                            };
+
+                        func(newrule);
+
+                    }
+
+                }
+
+            },
+
+            binder: function (object, events, func) {
+
+                var events = events.split(','),
+                    eventscount = events.length;
+
+                while (eventscount-- > 0) {
+
+                    if (object.attachEvent) object.attachEvent('on' + events[eventscount].trim(), func);
+                    else object.addEventListener(events[eventscount].trim(), func, false);
+
+                }
+
             }
 
-        },
+        };
 
-        binder: function(object, events, func) {
+        /* Begin min-max-font-size functions */
 
-            var events = events.split(','),
-                eventscount = events.length;
+        var typo = {
 
-            while (eventscount-- > 0) {
+            minMaxFontSize: function (selector) {
 
-                if (object.attachEvent) object.attachEvent('on' + events[eventscount].trim(), func);
-                else object.addEventListener(events[eventscount].trim(), func, false);
+                var eles = document.querySelectorAll(selector),
+                    elescount = eles.length;
 
-            }
+                while (elescount-- > 0) {
 
-        }
+                    var ele = eles[elescount],
 
-    };
+                        selRules = stylefill.allRules[selector],
+                        max = selRules['max-font-size'] ? selRules['max-font-size']['value'] : false,
+                        min = (selRules['min-font-size']) ? selRules['min-font-size']['value'] : false;
 
-    /* Begin min-max-font-size functions */
+                    ele.style.fontSize = '';
 
-    var typo = {
+                    var eleFontSize = parseFloat(window.getComputedStyle(ele, null).getPropertyValue('font-size'));
 
-        minMaxFontSize: function(selector) {
+                    if (min && eleFontSize <= parseFloat(min)) ele.style.fontSize = min;
+                    else if (max && eleFontSize >= parseFloat(max)) ele.style.fontSize = max;
 
-            var eles = document.querySelectorAll(selector),
-                elescount = eles.length;
-
-            while (elescount-- > 0) {
-
-                var ele = eles[elescount],
-
-                    selRules = stylefill.allRules[selector],
-                    max = selRules['max-font-size'] ? selRules['max-font-size']['value'] : false,
-                    min = (selRules['min-font-size']) ? selRules['min-font-size']['value'] : false;
-
-                ele.style.fontSize = '';
-
-                var eleFontSize = parseFloat(window.getComputedStyle(ele, null).getPropertyValue('font-size'));
-
-                if (min && eleFontSize <= parseFloat(min)) ele.style.fontSize = min;
-                else if (max && eleFontSize >= parseFloat(max)) ele.style.fontSize = max;
+                }
 
             }
 
-        }
 
+        };
 
-    };
+        typo.maxFontSize = typo.minFontSize = function (rule) {
 
-    typo.maxFontSize = typo.minFontSize = function(rule) {
-
-        typo.minMaxFontSize(rule.selector);
-
-        stylefill.binder(window, 'resize', function() {
             typo.minMaxFontSize(rule.selector);
+
+            stylefill.binder(window, 'resize', function () {
+                typo.minMaxFontSize(rule.selector);
+            });
+
+        };
+
+        // assign the CSS property to the function
+        stylefill.init({
+            'max-font-size': typo.maxFontSize,
+            'min-font-size': typo.minFontSize
         });
-
-    };
-
-    // assign the CSS property to the function
-    stylefill.init({
-        'max-font-size': typo.maxFontSize,
-        'min-font-size': typo.minFontSize
-    });
-</script>
+    </script>
 </body>
 
 </html>
