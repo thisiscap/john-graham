@@ -53,6 +53,8 @@
 
     <!--All CSS is inlined from here-->
     <style>
+        /*Structure and Elements*/
+        
         ::-moz-selection {
             color: white;
             background: black;
@@ -76,56 +78,33 @@
             padding: 1rem;
         }
         
-        /*Responsive content for header*/
-        
-        h1::before {
-            content: "J.G"
+        main,
+        section {
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
         }
-                        
-        @media (min-width: 200px) {
-            h1::before {
-            content: "John Graham"
-            }
-        }
-                
-        @media (min-width: 800px) {
-            h1::before {
-            content: "John J Graham"
-            }
-        }
-        
-        h2,
-        p {
-            margin: 3rem 0;
-        }
+        /*Typography*/
         
         h1 {
             font-size: 8vh;
             max-font-size: 60px;
-            display: inline-block;
-            margin-top: 0;
+            margin: 0;
         }
         
         h2,
         p {
             font-size: 6vh;
             max-font-size: 50px;
+            margin: 3rem 0;
+            max-width: 45ch;
         }
         
-        section h1,
-        section h2,
-        section p {
+        header > p {
+            margin: 1.5rem 0;
+        }
+        
+        .small {
             font-size: 4vh;
             max-font-size: 25px;
-        }
-        
-        header > span {
-            margin-left: 3rem;
-        }
-        
-        main,
-        section {
-            border-top: 1px solid black;
         }
     </style>
 
@@ -135,12 +114,12 @@
 
     <header>
         <!--Content is changed from media queries-->
-        <h1></h1>
-        <span>
-            <a href="john@johngraham.co">Email.</a>
+        <h1>John J Graham</h1>
+        <p class="small">
+            <a href="mailto:john@johngraham.co">Email.</a>
             <a href="https://uk.linkedin.com/in/john-graham-7bb3ab13">Connect.</a>
-            <a href="#change-me">Call.</a>
-        </span>
+            <a href="tel:+447738220868">Call.</a>
+        </p>
     </header>
 
     <!--Main content-->
@@ -153,286 +132,16 @@
         <p>You will find me working on marketing, communication, and launch strategies that you (or we) can actually implement. And finding ways to get users that matter to your business.</p>
         <p>Be it with a day of consultancy. Or 12 months getting our hands dirty. Together.</p>
         <p>Interested? Let’s talk.</p>
-        <p><a href="john@johngraham.co">Email</a>. <a href="https://uk.linkedin.com/in/john-graham-7bb3ab13">Connect</a>. Call <a href="#change-me">(+44 (0)7738220868)</a>.</p>
+        <p><a href="mailto:john@johngraham.co">Email</a>. <a href="https://uk.linkedin.com/in/john-graham-7bb3ab13">Connect</a>. Call <a href="tel:+447738220868">(+44 (0)7738220868)</a>.</p>
     </main>
 
     <!--Sub content-->
     <section>
-        <p>Other clients I’ve worked with: <a href="#change-me">Deloitte</a>, <a href="http://www.getalbert.com/">Albert</a>, <a href="http://www.appsumer.io/">Appsumer</a>, <a href="http://www.streetbees.com/">Streetbees</a>, <a href="http://www.activeinboxhq.com/">ActiveInbox</a>, <a href="http://www.causr.co/">Causr</a>.</p>
+        <p class="small">Other clients I’ve worked with: <a href="http://www2.deloitte.com/uk/en.html">Deloitte</a>, <a href="http://www.getalbert.com/">Albert</a>, <a href="http://www.appsumer.io/">Appsumer</a>, <a href="http://www.streetbees.com/">Streetbees</a>, <a href="http://www.activeinboxhq.com/">ActiveInbox</a>, <a href="http://www.causr.co/">Causr</a>.</p>
     </section>
-    <script>
-        /* 
-
-                    mm-fontsize.js
-
-                    This script uses stylfill.js (https://github.com/nathanford/stylefill/) to allow properties to be written in the CSS.
-
-                    To use the min-font-size or max-font-size propery, just write it in your CSS like any other property:
-
-                    h1 {
-                    	font-size: 4vw
-                    	max-font-size: 50px;
-                    	min-font-size: 20px;
-                    } 
-
-                    Notes: 
-                    * This is only for when using vw or vh units for font size.
-                    * Right now, only px is the only unit accepted for min and max-font-size
-
-                    */
-
-        var stylefill = {
-
-            allRules: new Object(),
-
-            allFills: new Object(),
-
-            objSize: function(obj) {
-
-                var size = 0,
-                    key;
-
-                for (key in obj) {
-                    if (obj.hasOwnProperty(key)) size++;
-                }
-
-                return size;
-
-            },
-
-            arraySliceShim: function() { // fixes Array.prototype.slice support for IE lt 9
-
-                'use strict';
-                var _slice = Array.prototype.slice;
-
-                try {
-                    _slice.call(document.documentElement);
-                } catch (e) { // Fails in IE < 9
-
-                    Array.prototype.slice = function(begin, end) {
-
-                        var i, arrl = this.length,
-                            a = [];
-
-                        if (this.charAt) {
-
-                            for (i = 0; i < arrl; i++) {
-                                a.push(this.charAt(i));
-                            }
-
-                        } else {
-
-                            for (i = 0; i < this.length; i++) {
-                                a.push(this[i]);
-                            }
-
-                        }
-
-                        return _slice.call(a, begin, end || a.length);
-
-                    };
-
-                }
-
-            },
-
-            init: function(params) {
-
-                this.allFills = params;
-
-                this.getStyleSheet(params);
-
-            },
-
-            loadFile: function(params, url, scount) {
-
-                var req;
-
-                if (window.XMLHttpRequest) req = new XMLHttpRequest();
-                else req = new ActiveXObject("Microsoft.XMLHTTP");
-
-                req.open("GET", url, true);
-
-                req.onreadystatechange = function() {
-
-                    if (this.readyState == 4 && this.status == 200) stylefill.findRules(params, this.responseText, scount);
-
-                };
-
-                req.send(null);
-
-            },
-
-            getStyleSheet: function(params) {
-
-                var sheetstext = new Array(),
-                    sheets = Array.prototype.slice.call(document.getElementsByTagName('link')); // grab stylesheet links - not used yet
-
-                sheets.push(Array.prototype.slice.call(document.getElementsByTagName('style'))[0]); // add on page CSS
-
-                sheets.reverse();
-
-                var scount = this.objSize(sheets);
-
-                while (scount-- > 0) {
-
-                    var sheet = sheets[scount];
-
-                    if (sheet.innerHTML) this.findRules(params, sheet.innerHTML, scount);
-                    else if (sheet.href.match(document.domain)) this.loadFile(params, sheet.href, scount);
-
-                }
-
-            },
-
-            checkRule: function(property) {
-
-                var propertyCamel = property.replace(/(^|-)([a-z])/g, function(m1, m2, m3) {
-                    return m3.toUpperCase();
-                });
-
-                if (('Webkit' + propertyCamel) in document.body.style || ('Moz' + propertyCamel) in document.body.style || ('O' + propertyCamel) in document.body.style || property in document.body.style) return true;
-
-                else return false;
-
-            },
-
-            findRules: function(params, sheettext, scount) {
-
-                if (sheettext) {
-
-                    var pcount = this.objSize(params);
-
-                    for (property in params) {
-
-                        var selreg = new RegExp('([^}{]+){([^}]+)?' + property.replace('-', '\\-') + '[\\s\\t]*:[\\s\\t]*([^;]+)', 'gi'),
-                            selmatch,
-
-                            support = stylefill.checkRule(property);
-
-                        while (selmatch = selreg.exec(sheettext)) {
-
-                            var sels = selmatch[1].replace(/^([\s\n\r\t]+|\/\*.*?\*\/)+/, '').replace(/[\s\n\r\t]+$/, ''),
-                                val = selmatch[3];
-
-                            sels = sels.split(',');
-
-                            for (sel in sels) {
-
-                                var s = sels[sel];
-
-                                if (!stylefill.allRules[s]) stylefill.allRules[s] = new Object();
-                                stylefill.allRules[s][property] = {
-                                    'support': support,
-                                    'value': val
-                                };
-
-                            }
-
-                        }
-
-                    }
-
-                    if (scount == 1) this.runFills();
-
-                }
-
-            },
-
-            runFills: function() {
-
-                var allRules = stylefill.allRules,
-                    allFills = stylefill.allFills;
-
-                for (i in allRules) {
-
-                    var rules = allRules[i];
-
-                    for (j in rules) {
-
-                        var rule = rules[j],
-                            func = allFills[j],
-
-                            newrule = {
-
-                                support: rule['support'],
-                                selector: i,
-                                property: j,
-                                value: rule['value']
-
-                            };
-
-                        func(newrule);
-
-                    }
-
-                }
-
-            },
-
-            binder: function(object, events, func) {
-
-                var events = events.split(','),
-                    eventscount = events.length;
-
-                while (eventscount-- > 0) {
-
-                    if (object.attachEvent) object.attachEvent('on' + events[eventscount].trim(), func);
-                    else object.addEventListener(events[eventscount].trim(), func, false);
-
-                }
-
-            }
-
-        };
-
-        /* Begin min-max-font-size functions */
-
-        var typo = {
-
-            minMaxFontSize: function(selector) {
-
-                var eles = document.querySelectorAll(selector),
-                    elescount = eles.length;
-
-                while (elescount-- > 0) {
-
-                    var ele = eles[elescount],
-
-                        selRules = stylefill.allRules[selector],
-                        max = selRules['max-font-size'] ? selRules['max-font-size']['value'] : false,
-                        min = (selRules['min-font-size']) ? selRules['min-font-size']['value'] : false;
-
-                    ele.style.fontSize = '';
-
-                    var eleFontSize = parseFloat(window.getComputedStyle(ele, null).getPropertyValue('font-size'));
-
-                    if (min && eleFontSize <= parseFloat(min)) ele.style.fontSize = min;
-                    else if (max && eleFontSize >= parseFloat(max)) ele.style.fontSize = max;
-
-                }
-
-            }
-
-
-        };
-
-        typo.maxFontSize = typo.minFontSize = function(rule) {
-
-            typo.minMaxFontSize(rule.selector);
-
-            stylefill.binder(window, 'resize', function() {
-                typo.minMaxFontSize(rule.selector);
-            });
-
-        };
-
-        // assign the CSS property to the function
-        stylefill.init({
-            'max-font-size': typo.maxFontSize,
-            'min-font-size': typo.minFontSize
-        });
-    </script>
+   
+    <script src="assets/js/mm-fontsize.js" type="text/javascript"></script>
+    
 </body>
 
 </html>
