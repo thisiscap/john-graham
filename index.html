@@ -68,15 +68,48 @@
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             font-size: 20px;
-            font-weight: bolder;
+            font-weight: bold;
+            background-color: #fefbfa;
         }
         
-        h1,
+        body {
+            padding: 1rem;
+        }
+        
+        /*Responsive content for header*/
+        
+        h1::before {
+            content: "J.G"
+        }
+                        
+        @media (min-width: 200px) {
+            h1::before {
+            content: "John Graham"
+            }
+        }
+                
+        @media (min-width: 800px) {
+            h1::before {
+            content: "John J Graham"
+            }
+        }
+        
+        h2,
+        p {
+            margin: 3rem 0;
+        }
+        
+        h1 {
+            font-size: 8vh;
+            max-font-size: 60px;
+            display: inline-block;
+            margin-top: 0;
+        }
+        
         h2,
         p {
             font-size: 6vh;
             max-font-size: 50px;
-            margin: 1rem 1rem 3rem;
         }
         
         section h1,
@@ -85,16 +118,34 @@
             font-size: 4vh;
             max-font-size: 25px;
         }
+        
+        header > span {
+            margin-left: 3rem;
+        }
+        
+        main,
+        section {
+            border-top: 1px solid black;
+        }
     </style>
 
 </head>
 
 <body>
 
+    <header>
+        <!--Content is changed from media queries-->
+        <h1></h1>
+        <span>
+            <a href="john@johngraham.co">Email.</a>
+            <a href="https://uk.linkedin.com/in/john-graham-7bb3ab13">Connect.</a>
+            <a href="#change-me">Call.</a>
+        </span>
+    </header>
+
     <!--Main content-->
     <main>
         <!--Headings (kept as h1 and h2 for semantic purposes)-->
-        <h1>John J Graham</h1>
         <h2>I help early stage startups talk and grow.</h2>
         <p>I’m a mobile marketing expert who has led some of the UK’s most admired mobile-first businesses, from launch, to high-growth, and acquisition.</p>
         <p>I’ve helped the likes of <a href="https://yplanapp.com/">YPlan</a>, <a href="https://velocityapp.com/">Uncover</a>, and <a href="http://gett.com/uk/">Gett</a>, find the right users. And talk in a way that stands out.</p>
@@ -112,23 +163,23 @@
     <script>
         /* 
 
-            mm-fontsize.js
+                    mm-fontsize.js
 
-            This script uses stylfill.js (https://github.com/nathanford/stylefill/) to allow properties to be written in the CSS.
+                    This script uses stylfill.js (https://github.com/nathanford/stylefill/) to allow properties to be written in the CSS.
 
-            To use the min-font-size or max-font-size propery, just write it in your CSS like any other property:
+                    To use the min-font-size or max-font-size propery, just write it in your CSS like any other property:
 
-            h1 {
-            	font-size: 4vw
-            	max-font-size: 50px;
-            	min-font-size: 20px;
-            } 
+                    h1 {
+                    	font-size: 4vw
+                    	max-font-size: 50px;
+                    	min-font-size: 20px;
+                    } 
 
-            Notes: 
-            * This is only for when using vw or vh units for font size.
-            * Right now, only px is the only unit accepted for min and max-font-size
+                    Notes: 
+                    * This is only for when using vw or vh units for font size.
+                    * Right now, only px is the only unit accepted for min and max-font-size
 
-            */
+                    */
 
         var stylefill = {
 
@@ -136,7 +187,7 @@
 
             allFills: new Object(),
 
-            objSize: function (obj) {
+            objSize: function(obj) {
 
                 var size = 0,
                     key;
@@ -149,7 +200,7 @@
 
             },
 
-            arraySliceShim: function () { // fixes Array.prototype.slice support for IE lt 9
+            arraySliceShim: function() { // fixes Array.prototype.slice support for IE lt 9
 
                 'use strict';
                 var _slice = Array.prototype.slice;
@@ -158,7 +209,7 @@
                     _slice.call(document.documentElement);
                 } catch (e) { // Fails in IE < 9
 
-                    Array.prototype.slice = function (begin, end) {
+                    Array.prototype.slice = function(begin, end) {
 
                         var i, arrl = this.length,
                             a = [];
@@ -185,7 +236,7 @@
 
             },
 
-            init: function (params) {
+            init: function(params) {
 
                 this.allFills = params;
 
@@ -193,7 +244,7 @@
 
             },
 
-            loadFile: function (params, url, scount) {
+            loadFile: function(params, url, scount) {
 
                 var req;
 
@@ -202,7 +253,7 @@
 
                 req.open("GET", url, true);
 
-                req.onreadystatechange = function () {
+                req.onreadystatechange = function() {
 
                     if (this.readyState == 4 && this.status == 200) stylefill.findRules(params, this.responseText, scount);
 
@@ -212,7 +263,7 @@
 
             },
 
-            getStyleSheet: function (params) {
+            getStyleSheet: function(params) {
 
                 var sheetstext = new Array(),
                     sheets = Array.prototype.slice.call(document.getElementsByTagName('link')); // grab stylesheet links - not used yet
@@ -234,9 +285,9 @@
 
             },
 
-            checkRule: function (property) {
+            checkRule: function(property) {
 
-                var propertyCamel = property.replace(/(^|-)([a-z])/g, function (m1, m2, m3) {
+                var propertyCamel = property.replace(/(^|-)([a-z])/g, function(m1, m2, m3) {
                     return m3.toUpperCase();
                 });
 
@@ -246,7 +297,7 @@
 
             },
 
-            findRules: function (params, sheettext, scount) {
+            findRules: function(params, sheettext, scount) {
 
                 if (sheettext) {
 
@@ -288,7 +339,7 @@
 
             },
 
-            runFills: function () {
+            runFills: function() {
 
                 var allRules = stylefill.allRules,
                     allFills = stylefill.allFills;
@@ -319,7 +370,7 @@
 
             },
 
-            binder: function (object, events, func) {
+            binder: function(object, events, func) {
 
                 var events = events.split(','),
                     eventscount = events.length;
@@ -339,7 +390,7 @@
 
         var typo = {
 
-            minMaxFontSize: function (selector) {
+            minMaxFontSize: function(selector) {
 
                 var eles = document.querySelectorAll(selector),
                     elescount = eles.length;
@@ -366,11 +417,11 @@
 
         };
 
-        typo.maxFontSize = typo.minFontSize = function (rule) {
+        typo.maxFontSize = typo.minFontSize = function(rule) {
 
             typo.minMaxFontSize(rule.selector);
 
-            stylefill.binder(window, 'resize', function () {
+            stylefill.binder(window, 'resize', function() {
                 typo.minMaxFontSize(rule.selector);
             });
 
