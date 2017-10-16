@@ -1,12 +1,89 @@
 // Custom styles
 // Simple site so all is bundled in here
 
+// Webfonts
+
 // Variables
 
+// Colours
+$textColour: #777;
+
+// Breakpoints
+$smallBreakpoint: 400px;
+$mediumBreakpoint: 800px;
+$largeBreakpoint: 1000px;
+
 // Mixins
+
+//Responsive mixins
+@mixin mobileOnwards {
+  @media (min-width: #{$smallBreakpoint}) {
+    @content;
+  }
+}
+@mixin tabletOnwards {
+  @media (min-width: #{$mediumBreakpoint}) {
+    @content;
+  }
+}
+@mixin desktopOnwards {
+  @media (min-width: #{$largeBreakpoint}) {
+    @content;
+  }
+}
 
 // Placeholders
 
 // Global styles
 
+// Use the system font stack
+body {
+	font-family: -apple-system,
+	            BlinkMacSystemFont,
+	            "Segoe UI",
+	            Roboto,
+	            Oxygen-Sans,
+	            Ubuntu,
+	            Cantarell,
+	            "Helvetica Neue",
+	            sans-serif;
+
+  // Allow words to break and use hyphenation
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+
+  // Baseline flexible
+  font-size: 80%;
+  line-height: 1.2;
+
+  @include $tabletOnwards {
+    font-size: 90%;
+  }
+
+  @include $desktopOnwards {
+    font-size: 100%;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+// Default link styling
+a {
+	&:link {}
+	&:hover {}
+	&:active {}
+	&:visited {}
+}
+
 // Components
+
+.section {}
+.section--intro{}
