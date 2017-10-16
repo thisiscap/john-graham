@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       // Merge and tidy up multiple js files
       uglify: {
         js : {
-          src : '_build/_js/*.js',
+          src : ['_build/_vendor/*.js', '_build/_js/*.js'],
           dest : 'assets/js/john-graham.min.js'
         }
       },
