@@ -6,7 +6,8 @@
 // Variables
 
 // Colours
-$textColour: #777;
+$textColour: #6c6c6c;
+$paleBlue: #aec1d3;
 
 // Breakpoints
 $smallBreakpoint: 400px;
@@ -48,6 +49,8 @@ body {
 	            "Helvetica Neue",
 	            sans-serif;
 
+  color: $textColour;
+
   // Allow words to break and use hyphenation
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -87,3 +90,11 @@ a {
 
 .section {}
 .section--intro{}
+.section--testimonials{
+  .textHighlight {
+    background-color: $paleBlue;
+  }
+}
+.section--about{}
+.section--experience{}
+.section--contact{}
