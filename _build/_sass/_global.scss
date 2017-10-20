@@ -1,79 +1,4 @@
-// Custom styles
-// Simple site so all is bundled in here
-
 // Webfonts
-
-// Variables
-
-// Colours
-$textColour: #6c6c6c;
-$paleBlue: #aec1d3;
-
-$green: #aad3b3;
-$yellow: #e1e2b6;
-$pink: #fadce7;
-$peach: #f1d8be;
-$blue: #a4b9ce;
-
-// Mesurements
-$contentWidth: 1200px;
-
-// Breakpoints
-$smallBreakpoint: 400px;
-$mediumBreakpoint: 800px;
-$largeBreakpoint: 1000px;
-
-// Mixins
-
-//Responsive mixins
-@mixin mobileOnwards {
-  @media (min-width: #{$smallBreakpoint}) {
-    @content;
-  }
-}
-@mixin tabletOnwards {
-  @media (min-width: #{$mediumBreakpoint}) {
-    @content;
-  }
-}
-@mixin desktopOnwards {
-  @media (min-width: #{$largeBreakpoint}) {
-    @content;
-  }
-}
-
-// Placeholders
-%marginAuto {
-  margin: 0 auto;
-}
-
-%centerText {
-  text-align: center;
-}
-
-%fullWidth {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-
-%clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
-%hyphenate {
-  // Allow words to break and use hyphenation
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
 
 // Global styles
 
@@ -108,6 +33,7 @@ body {
   }
 }
 
+// Remove default weight from headings
 h1,
 h2,
 h3,
@@ -119,87 +45,14 @@ h6 {
 
 // Default link styling
 a {
-	&:link {}
-	&:hover {}
-	&:active {}
+	&:link {
+		text-decoration: none;
+	}
+	&:hover {
+		text-decoration: underline;
+	}
+	&:active {
+		background-color: red;
+	}
 	&:visited {}
-}
-
-// Components
-
-.section {
-  //padding: 1em;
-}
-
-.section-wrapper {
-  @extend %marginAuto;
-  max-width: $contentWidth;
-  padding: 4em 0;
-}
-
-.section--intro {
-  background-color: $green;
-  span {
-    text-transform: uppercase;
-  }
-}
-
-.section--testimonials {
-  background-color: $yellow;
-
-  .testimonial-wrapper {
-    margin-bottom: 4em;
-
-    p {
-      max-width: 800px;
-    }
-
-    @supports not (display: flex) {
-      p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-
-    &:nth-of-type(1) {
-      p {
-        transform: rotate(2deg);
-      }
-    }
-
-    &:nth-of-type(3) {
-      p {
-        transform: rotate(-2deg);
-      }
-    }
-
-    &:nth-of-type(4) {
-      p {
-        transform: rotate(3deg);
-      }
-    }
-  }
-
-
-
-  .testimonial-textHighlight {
-    background-color: $paleBlue;
-  }
-
-  .testimonial-author {
-    margin-top: 0;
-    font-weight: bold;
-  }
-}
-
-.section--about {
-  background-color: $pink;
-}
-
-.section--experience {
-  background-color: $peach;
-}
-
-.section--contact {
-  background-color: $blue;
 }

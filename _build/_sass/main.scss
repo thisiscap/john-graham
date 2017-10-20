@@ -1,6 +1,8 @@
 // Vendor
-@import "normalize"; // Reset
+@import "normalize"; // CSS Reset
 @import "jquery.fullPage"; // Required styles for fullPage.js
 
 // Build
-@import "global";
+@import "variables-mixins-placeholders"; // SASS
+@import "global"; // Styles that apply site wide
+@import "components"; // All component styles grouped here
