@@ -21,11 +21,11 @@ body {
   -webkit-font-smoothing: antialiased;
 
   // Baseline flexible
-  font-size: 80%;
+  font-size: 100%;
   line-height: 1.2;
 
   @include tabletOnwards {
-    font-size: 90%;
+    font-size: 120%;
   }
 
   @include desktopOnwards {
@@ -46,6 +46,7 @@ h6 {
 // Default link styling
 a {
 	&:link {
+		color: $linkColour;
 		text-decoration: none;
 	}
 	&:hover {
@@ -54,5 +55,7 @@ a {
 	&:active {
 		background-color: red;
 	}
-	&:visited {}
+	&:visited {
+		color: $linkColour;
+	}
 }
