@@ -7,7 +7,7 @@
 .section-wrapper {
   @extend %marginAuto;
   max-width: $contentWidth;
-  padding: 4em 0;
+  padding: 4em 1rem;
 }
 
 // Intro
@@ -88,9 +88,24 @@
   background-color: $peach;
 }
 
-.client-grid {}
+$gridGutter: 0.5rem;
 
-.client-grid-item {}
+.client-grid {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.client-grid-item {
+  margin: 0 $gridGutter 1rem;
+  width: calc((100% / 2) - (#{$gridGutter} * 4));
+
+  @include tabletOnwards {
+    width: calc((100% / 3) - (#{$gridGutter} * 4));
+  }
+  @include desktopOnwards {
+    width: calc((100% / 5) - (#{$gridGutter} * 4));
+  }
+}
 
 // Contact
 
