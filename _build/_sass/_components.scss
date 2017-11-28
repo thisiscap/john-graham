@@ -14,37 +14,26 @@
 
 .section--intro {
   background-color: $green;
-}
 
-.intro-wrapper {
-  padding-bottom: 0;
-}
+  h1 {
+    margin-bottom: 0;
+  }
 
-.portrait-wrapper {
-  position: relative;
-  margin-top: 2rem;
+  h2 {
+    margin-top: 0;
+    margin-bottom: 8rem;
+  }
 
-  img {
+  .intro-wrapper {
+    margin-bottom: 4em;
+  }
+
+  .intro-image {
+    display: block;
     width: 100%;
-    max-width: 400px;
+    height: auto;
   }
 
-  span {
-    text-decoration: uppercase;
-    position: absolute;
-  }
-  span:nth-of-type(1) {
-    top: 0;
-    left: 0;
-  }
-  span:nth-of-type(2) {
-    top: 0;
-    right: 0;
-  }
-  span:nth-of-type(3) {
-    bottom: 0;
-    left: 0;
-  }
 }
 
 // Testimonials
